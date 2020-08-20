@@ -34,7 +34,7 @@ def processSong(s, album=None, artist=None, title=None):
     # Modify tag data
     try:
         id3.initTag()
-        id3.tag.comments.set(u"Tagged by Klys' organizer 0.0.1")
+        id3.tag.comments.set(u"Tagged by Klys' Music Tools")
         id3.tag.artist = artist
         id3.tag.album = album
         id3.tag.title = title
