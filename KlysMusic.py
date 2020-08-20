@@ -1,5 +1,6 @@
 import os, platform
 from modules import KlysD3, KlysStats, KlysPlaylist
+from modules.utils.FileChooser import FileChooser
 
 def clearScreen():
     if platform.system() == 'Windows':
@@ -13,13 +14,19 @@ def mainLoop():
     cmd = input("1: Stats\n2: ID3 retagging\n3: Playlist regeneration\nSelect option to continue or anything else to exit\n")
     clearScreen()
     if cmd == '1':
-        KlysStats.main(parentDir)
+        print("Choose the folder to get stats for:")
+        KlysStats.main(FileChooser(parentDir))
         mainLoop()
     elif cmd == '2':
-        KlysD3.main(parentDir)
+        print("Choose the folder to perform ID3 retagging for:")
+        KlysD3.main(FileChooser(parentDir))
         mainLoop()
     elif cmd == '3':
-        KlysPlaylist.main(parentDir, currentDir)
+        print("Choose the folder containing music:")
+        musicDir = FileChooser(parentDir)
+        print("Choose the folder to output Playlists to:")
+        playlistDir = FileChooser(currentDir)
+        KlysPlaylist.main(musicDir, playlistDir)
         mainLoop()
     else:
         print ("Exiting...")
